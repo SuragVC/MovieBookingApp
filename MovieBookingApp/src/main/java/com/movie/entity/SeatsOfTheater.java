@@ -1,14 +1,17 @@
 package com.movie.entity;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,23 +28,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Theaters {
+public class SeatsOfTheater {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer theaterId;
-	@Column(unique=true)
-	private String theaterName;
-	private String address;
-	private String city;
-	private String pin;
-	@OneToMany
-	@JsonIgnore
-	private List<MovieToTheaters>movieToTheater=new ArrayList<>();
-	@OneToMany
-	@JsonIgnore
-	private List<Ticket>ticket=new ArrayList<>();
-	@OneToMany
-	@JsonIgnore
-	private List<TheaterScreen>theaterScreen=new ArrayList<>();
-	
+	private Integer seatsOfTheaterId;
+	private Integer totalSeats;
+	private Integer bookedSeats;
+	private Integer remainingSeats;
+	private Double priceForSeat;
+	private StringBuilder seatsOfTheater;
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seatsOfTheaterId")
+	private TheaterScreen theaterScreen;
 }

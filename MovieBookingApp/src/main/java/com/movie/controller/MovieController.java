@@ -3,6 +3,8 @@ package com.movie.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.movie.entity.Movies;
@@ -23,7 +26,7 @@ public class MovieController {
 	@Autowired
 	private MovieServices mServices;
 	@PostMapping("/movie")
-	public ResponseEntity<Movies>saveMovie(@RequestBody Movies movie) throws MoviesExceptions{
+	public ResponseEntity<Movies>saveMovie(@RequestBody @Valid Movies movie) throws MoviesExceptions{
 		Movies saved = mServices.createMovie(movie);
 		return new ResponseEntity<Movies>(saved,HttpStatus.CREATED);
 	}
@@ -34,13 +37,18 @@ public class MovieController {
 		return new ResponseEntity<List<Movies>>(saved,HttpStatus.CREATED);
 	}
 	@GetMapping("/movies/{name}")
-	public ResponseEntity <Movies>getMovieByName(@PathVariable String name) throws MoviesExceptions{
-		Movies saved=mServices.findByName(name);
-		return new ResponseEntity<Movies>(saved,HttpStatus.CREATED);
+	public ResponseEntity <List<Movies>>getMovieByName(@RequestParam String name) throws MoviesExceptions{
+		List<Movies> list=mServices.findByName(name);
+		return new ResponseEntity<List<Movies>>(list,HttpStatus.OK);
 	}
-	@GetMapping("/movies/{year}")
-	public ResponseEntity <Movies>getMovieByYear(@PathVariable String year) throws MoviesExceptions{
-		Movies saved=mServices.findByYear(year);
-		return new ResponseEntity<Movies>(saved,HttpStatus.CREATED);
+	@PostMapping("/movies/{year}")
+	public ResponseEntity <List<Movies>>getMovieByYear(@PathVariable String year) throws MoviesExceptions{
+		List<Movies> list=mServices.findByYear(year);
+		return new ResponseEntity<List<Movies>>(list,HttpStatus.OK);
+	}
+	@GetMapping("/theater/{movieName}")
+	public ResponseEntity <List<String>>getTheaterByMovieName(@PathVariable String movieName) throws MoviesExceptions{
+		List<String> list=mServices.findTheaterByMovieName(movieName);
+		return new ResponseEntity<List<String>>(list,HttpStatus.OK);
 	}
 }

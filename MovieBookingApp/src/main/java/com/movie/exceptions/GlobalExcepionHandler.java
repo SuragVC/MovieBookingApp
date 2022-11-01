@@ -26,4 +26,20 @@ public class GlobalExcepionHandler {
 		error.setTime(LocalDateTime.now());
 		return new ResponseEntity<ErrorDetails>(error,HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(ConnectorServiceException.class)
+	public ResponseEntity<ErrorDetails>connectorServiceExceptionExcepions(ConnectorServiceException exception,WebRequest req){
+		ErrorDetails error=new ErrorDetails();
+		error.setDetails(exception.getMessage());
+		error.setMessage(req.getDescription(false));
+		error.setTime(LocalDateTime.now());
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(TicketException.class)
+	public ResponseEntity<ErrorDetails>ticketException(TicketException exception,WebRequest req){
+		ErrorDetails error=new ErrorDetails();
+		error.setDetails(exception.getMessage());
+		error.setMessage(req.getDescription(false));
+		error.setTime(LocalDateTime.now());
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.BAD_REQUEST);
+	}
 }

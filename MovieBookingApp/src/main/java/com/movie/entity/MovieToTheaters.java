@@ -1,8 +1,14 @@
 package com.movie.entity;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,12 +22,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Tickets {
+public class MovieToTheaters {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer ticketId;
-	private TheaterCategory theaterCategory;
-	private Integer row;
-	private Integer Column;
-	private Integer price;
+	@GeneratedValue
+	private Integer conectorId;
+	private Integer movieId;
+	private Integer theaterId;
+	private LocalDateTime time;
 }
