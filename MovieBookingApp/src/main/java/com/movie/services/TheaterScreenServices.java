@@ -6,5 +6,7 @@ import com.movie.exceptions.MoviesExceptions;
 import com.movie.exceptions.TheatersException;
 
 public interface TheaterScreenServices {
-	public Theaters addScreen(TheaterScreen screen)throws TheatersException,MoviesExceptions;
+	public TheaterScreen addScreen(TheaterScreen screen)throws TheatersException,MoviesExceptions;
+	public TheaterScreen removeScreenFromTheater(Integer ScreenId)throws TheatersException;
+	public String changeMovieRunningOnScreen(Integer ScreenId,Integer movieId)throws TheatersException,MoviesExceptions;
 }

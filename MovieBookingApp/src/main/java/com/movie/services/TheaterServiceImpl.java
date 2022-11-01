@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.movie.entity.Cast;
 import com.movie.entity.MovieToTheaters;
 import com.movie.entity.Movies;
-import com.movie.entity.SeatsOfTheater;
 import com.movie.entity.TheaterScreen;
 import com.movie.entity.Theaters;
 import com.movie.exceptions.MoviesExceptions;

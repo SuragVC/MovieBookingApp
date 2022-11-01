@@ -1,5 +1,8 @@
 package com.movie.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +26,7 @@ import lombok.Setter;
 @Entity
 public class TheaterScreen {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(unique = true)
 	private Integer screenId;
 	private Integer theaterId;
 	private Integer availableRows;
@@ -32,10 +35,19 @@ public class TheaterScreen {
 	private Integer movieId;
 	private String screenName;
 	@JsonIgnore
+	private Integer totalSeats;
+	@JsonIgnore
+	private Integer bookedSeats;
+	@JsonIgnore
+	private Integer remainingSeats;
+	@JsonIgnore
+	@Column(columnDefinition="TEXT")
+	private String reservedSeats;
+	@JsonIgnore
 	private String theaterName;
 	@JsonIgnore
 	private String movieName;
 	@OneToOne
 	@JsonIgnore
-	private SeatsOfTheater seats;
+	private Theaters theater;
 }
