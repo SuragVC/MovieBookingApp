@@ -43,5 +43,5 @@ public class Movies {
 	@Column(name="Year")
 	@Size(min = 4,max=4,message = "Year must be 4 character")
 	private String year;
-	
+	private Double totalCollection;
 }

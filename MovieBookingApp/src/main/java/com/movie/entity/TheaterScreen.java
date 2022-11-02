@@ -43,9 +43,7 @@ public class TheaterScreen {
 	@JsonIgnore
 	@Column(columnDefinition="TEXT")
 	private String reservedSeats;
-	@JsonIgnore
 	private String theaterName;
-	@JsonIgnore
 	private String movieName;
 	@OneToOne
 	@JsonIgnore

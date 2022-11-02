@@ -42,4 +42,13 @@ public class GlobalExcepionHandler {
 		error.setTime(LocalDateTime.now());
 		return new ResponseEntity<ErrorDetails>(error,HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(ScreenException.class)
+	public ResponseEntity<ErrorDetails>screenException(ScreenException exception,WebRequest req){
+		ErrorDetails error=new ErrorDetails();
+		error.setDetails(exception.getMessage());
+		error.setMessage(req.getDescription(false));
+		error.setTime(LocalDateTime.now());
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.BAD_REQUEST);
+	}
 }

@@ -1,5 +1,6 @@
 package com.movie.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,18 +23,16 @@ import lombok.Setter;
 @Entity
 public class Ticket {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer ticketId;
+	@Column(unique=true)
+	private String ticketId;
 	private Integer theaterId;
 	private Integer movieId;
 	private Integer ticketCount;
 	private Integer rowNo;
 	private Integer columnNo;
 	private Double payment;
+	private String seatAlloted;
+	private Double returnAmount;
 	@OneToOne
-	@JsonIgnore
-	private Theaters theater;
-	@OneToOne
-	@JsonIgnore
-	private Movies movie;
+	private TheaterScreen screen;
 }

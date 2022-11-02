@@ -66,7 +66,7 @@ public class TheaterScreenServicesImpl implements TheaterScreenServices {
 	public TheaterScreen removeScreenFromTheater(Integer screenId) throws TheatersException {
 		Optional<TheaterScreen> screenOpt = screenDao.findById(screenId);
 		if(screenOpt.isPresent()){
-			Optional<Theaters> theater = theaterDao.findById(screenOpt.get().getScreenId());
+			Optional<Theaters> theater = theaterDao.findById(screenOpt.get().getTheaterId());
 			List<TheaterScreen>screenList = theater.get().getTheaterScreen();
 			TheaterScreen removable=new TheaterScreen();
 			for(TheaterScreen itr:screenList) {
@@ -92,25 +92,15 @@ public class TheaterScreenServicesImpl implements TheaterScreenServices {
 		if(screenOpt.isPresent()){
 			Optional<Movies> movieOpt = movieDao.findById(movieId);
 			if(movieOpt.isPresent()) {
-				Optional<Theaters> theater = theaterDao.findById(screenOpt.get().getScreenId());
-				List<TheaterScreen>screenList = theater.get().getTheaterScreen();
-				TheaterScreen updatable=new TheaterScreen();
-				for(TheaterScreen itr:screenList) {
-					if(itr.getScreenId()==screenId) {
-						updatable=itr;
-						break;
-					}
-				}
-				String movieUpdating = updatable.getMovieName();
-				updatable.setMovieName(movieOpt.get().getName());
-				screenList.add(updatable);
-				screenDao.save(updatable);
-				String ans ="Movie "+movieUpdating+" changed to "+updatable.getMovieName()+" from "+updatable.getTheaterName()+" theater screen "+updatable.getScreenName();
+				String movieUpdating = screenOpt.get().getMovieName();
+				screenOpt.get().setMovieName(movieOpt.get().getName());
+				screenOpt.get().setMovieName(movieOpt.get().getName());
+				screenDao.save(screenOpt.get());
+				String ans ="Movie "+movieUpdating+" changed to "+screenOpt.get().getMovieName()+" from "+screenOpt.get().getTheaterName()+" theater screen "+screenOpt.get().getScreenName();
 				return ans;
 			}else {
 				throw new MoviesExceptions("Movie not found with id "+movieId);
 			}
-			
 		}
 		else {
 			throw new TheatersException("No Screen found with id "+screenId);
