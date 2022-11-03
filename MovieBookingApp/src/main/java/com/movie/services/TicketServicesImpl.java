@@ -31,7 +31,7 @@ public class TicketServicesImpl implements TicketServices{
 	private TheaterDAO theaterDao;
 	@Autowired
 	private TheaterScreenDAO screenDao;
-	@SuppressWarnings({ "unused", "unused" })
+	@SuppressWarnings("unused")
 	@Override
 	public Ticket bookAticket(Ticket ticket) throws TicketException, TheatersException,MoviesExceptions,ScreenException{
 		Optional<Theaters> theaterOpt= theaterDao.findById(ticket.getTheaterId());
@@ -78,7 +78,7 @@ public class TicketServicesImpl implements TicketServices{
 									ticket.setReturnAmount(totalAmountPay-totalAmountNeeded);
 									ticket.setScreen(screen);
 									ticket.setSeatAlloted(bookedSeat);
-									screen.setReservedSeats(reservedSeats);
+									screen.setReservedSeats(reservedSeats+bookedSeat);
 									screen.setRemainingSeats(screen.getRemainingSeats()-ticket.getTicketCount());
 									screen.setBookedSeats(screen.getBookedSeats()+ticket.getTicketCount());
 									Optional<Movies> movie =movieDao.findById(ticket.getMovieId());

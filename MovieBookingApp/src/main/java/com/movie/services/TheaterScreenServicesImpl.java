@@ -46,6 +46,7 @@ public class TheaterScreenServicesImpl implements TheaterScreenServices {
 				screen.setScreenId(PrimaryKeyGenerator.getRandomNumber());
 				screen.setTheaterName(theater.get().getTheaterName());
 				screen.setBookedSeats(0);
+				screen.setReservedSeats("");
 				screen.setTotalSeats(screen.getAvailableColums()*screen.getAvailableRows());
 				screen.setRemainingSeats(screen.getAvailableColums()*screen.getAvailableRows());
 				screen.setMovieName(movieOpt.get().getName());
